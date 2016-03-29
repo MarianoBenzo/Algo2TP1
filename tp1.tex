@@ -1,0 +1,208 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage[paper=a4paper, left=1.5cm, right=1.5cm, bottom=1.5cm, top=3.5cm]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{latexsym}
+\usepackage{lastpage}
+\usepackage{aed2-symb,aed2-itef,aed2-tad, caratula}
+\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+\usepackage{calc}
+
+\newcommand{\f}[1]{\text{#1}}
+\renewcommand{\paratodo}[2]{$\forall~#2$:#1}
+
+\sloppy
+
+%  \hypersetup{%
+%   % Para que el PDF se abra a p�gina completa.
+%   pdfstartview= {FitH \hypercalcbp{\paperheight-\topmargin-1in-\headheight}},
+%   pdfauthor={C�tedra de Algoritmos y Estructuras de Datos II - DC - UBA},
+%   pdfkeywords={TADs b�sicos},
+%   pdfsubject={Tipos abstractos de datos b�sicos}
+%  }
+
+\parskip=5pt % 10pt es el tama�o de fuente
+
+% Pongo en 0 la distancia extra entre �temes.
+\let\olditemize\itemize
+\def\itemize{\olditemize\itemsep=0pt}
+
+% Acomodo fancyhdr.
+\pagestyle{fancy}
+\thispagestyle{fancy}
+\addtolength{\headheight}{1pt}
+\lhead{Algoritmos y Estructuras de Datos II}
+\rhead{$1^{\mathrm{er}}$ cuatrimestre de 2015}
+\cfoot{\thepage /\pageref{LastPage}}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\author{Algoritmos y Estructuras de Datos II, DC, UBA.}
+\date{}
+\title{Tipos abstractos de datos b�sicos}
+
+\begin{document}
+
+
+% Estos comandos deben ir antes del \maketitle
+\materia{Algoritmos y Estructuras de Datos II} % obligatorio
+\submateria{Primer Cuatrimestre de 2015} % opcional
+\titulo{Trabajo Pr�ctico 1} % obligatorio
+\subtitulo{Especificaci�n} % opcional
+
+
+\integrante{INTEGRANTE, 1}{123/12}{1@gmail.com} % obligatorio 
+\integrante{INTEGRANTE, 2}{123/12}{2@gmail.com} % obligatorio 
+\integrante{INTEGRANTE, 3}{123/12}{3@gmail.com} % obligatorio 
+\integrante{INTEGRANTE, 4}{123/12}{4@gmail.com} % obligatorio 
+%Pagina de titulo e indice
+\thispagestyle{empty}
+
+\maketitle
+\tableofcontents
+
+\newpage
+
+
+\section{TAD \tadNombre{AS}}
+\begin{tad}{\tadNombre{AS}}
+\tadGeneros{as}
+
+\tadIgualdadObservacional{dc}{dc'}{dcnet}{}
+
+\tadUsa{\tadNombre{campus}}
+
+\tadExporta{\tadNombre{}}
+
+\tadObservadores
+
+%%%%%% EJEMPLOS  %%%%%%
+\tadOperacion{campus}{as}{campus}{}
+\tadOperacion{hayHippie?}{as/a,pos/p}{bool}{$posValida(campus(a),p)$}
+\tadOperacion{\#capturas}{as/a,seg/s}{nat}{$s \in seguridad(a)$}
+
+
+\tadGeneradores
+
+
+%%%%%% EJEMPLOS  %%%%%%
+
+\tadOperacion{nueva}{campus,conj(seguridad)}{as}{(\paratodo{e}{segs}) posValida(c,pos(e)) $\land$ (\paratodo{s,s1}{segs}) id(s)!=id(s1) $\implies$ pos(s)!=pos(s1)}
+\tadOperacion{sacarEst}{as/a,pos/p}{as}{$posValida(campus(a),p) \yluego hayEst?(a,p) \land posIngreso(a,p)$}
+
+\tadOtrasOperaciones
+
+
+%%%%%% EJEMPLOS  %%%%%%
+\tadOperacion{haySeg?}{as/a,pos/p}{bool}{}
+\tadOperacion{proximasPosiciones}{as/a,conj(pos)/minPos,pos/posAct}{conj(pos)}{$\neg(emptyset?(minPos)) \yluego posValida(campus(a),posAct) \land posicionesValidas(campus(a),minPos)$}
+
+
+\tadAxiomas[]
+
+
+\tadAxioma{campus(nueva($c,segs$))}{$c$}
+\tadAxioma{campus(moverEst($a,p_1,p_2$))}{$campus(a)$}
+
+\tadAxioma{\#capturas(sacarEst($a,p_1$),$s$)}{$\#capturas(a,s)$}
+\tadAxioma{\#capturas($a$,moverSeg($a,s,p_1$))}{$
+\beta(posValida(campus(a),<\pi_1(p_1)+1,\pi_2(p_1)>) \yluego (hayHippie?(a,<\pi_1(p_1)+1,\pi_2(p_1)>) \yluego encerrado(a,<\pi_1(p_1)+1,\pi_2(p_1)>))) + \\
+\beta(posValida(campus(a),<\pi_1(p_1)-1,\pi_2(p_1)>) \yluego (hayHippie?(a,<\pi_1(p_1)-1,\pi_2(p_1)>) \yluego encerrado(a,<\pi_1(p_1)-1,\pi_2(p_1)>))) + \\
+\beta(posValida(campus(a),<\pi_1(p_1),\pi_2(p_1)+1>) \yluego (hayHippie?(a,<\pi_1(p_1),\pi_2(p_1)+1>) \yluego encerrado(a,<\pi_1(p_1),\pi_2(p_1)+1>))) + \\
+\beta(posValida(campus(a),<\pi_1(p_1),\pi_2(p_1)-1>) \yluego (hayHippie?(a,<\pi_1(p_1),\pi_2(p_1)-1>) \yluego encerrado(a,<\pi_1(p_1),\pi_2(p_1)-1>))) + \#capturas(a,s)$}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Axiomas otras operaciones%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\tadAxioma{moverTodos(a,segs)}{\IF $(\emptyset?(segs))$ THEN 
+								   $\emptyset$ 
+							   ELSE 
+								   {\IF $(hayHippies?(a))$ THEN 
+										$Ag(moverTodos(a, sinUno(segs)), $
+										\\$moverSeg(a,dameUno(segs),$
+										\\$dameUno(proxPosiciones$\\ $ $ $(hippiesMasCerca(a,dameUno(segs))))))$ 
+								    ELSE 
+										$segs$ 
+									FI} 
+							   FI}
+
+
+\end{tad}
+
+
+\section{TAD \tadNombre{campus}}
+\begin{tad}{\tadNombre{campus}}
+\tadGeneros{campus}
+
+\tadUsa{\tadNombre{campus}}
+
+\tadExporta{\tadNombre{}}
+
+\tadObservadores
+\tadOperacion{alto}{campus}{nat}{}
+\tadOperacion{ancho}{campus}{nat}{}
+\tadOperacion{obstaculos}{campus}{conj(pos)}{}
+
+\tadGeneradores
+
+\tadOperacion{nuevo}{nat/ancho,nat/alto,conj(pos)/obst}{campus}{$1 \le ancho \land 1 \le alto$ $\land$ (\paratodo{pos}{p}) $p \in obst \impluego posValida(c,p)$}
+
+\tadOtrasOperaciones
+
+\tadOperacion{adyacente}{as/a,pos/pe,pos/pd}{bool}{$posValida(c,pe) \land posValida(c,pd)$}
+\tadOperacion{posValida}{as/a,pos/p}{bool}{}
+\tadOperacion{posIngreso}{as/a,pos/p}{bool}{}
+\tadOperacion{minDistsPos}{campus/c,pos/p,conj(pos)/posiciones}{conj(pos)}{$\neg(\emptyset?(posiciones))$}
+\tadOperacion{minDist}{campus/c,pos/p,conj(posiciones)/posiciones}{nat}{$\neg(\emptyset?(posiciones))$}
+\tadOperacion{distMan}{campus/c,pos/p1,pos/p2}{nat}{}
+\tadOperacion{restaAbs}{nat,nat}{nat}{}
+\tadOperacion{conjPos}{campus,nat,nat}{conj(pos)}{}
+
+\tadAxiomas[\paratodo{nat}{alto}, \paratodo{nat}{ancho}, \paratodo{conj (pos)}{obst}
+\\\paratodo{pos}{p _1} \paratodo {pos}{p _2}]
+
+%que es esto? Es para que quede alineado y bonito y no se vaya de la hoja.
+\tadAlinearAxiomas{\#paquetesEnviados(ingresarPaquete($dc$,$p_1$,$c_1$,$c_2$),$c_3$),d 923)}
+\tadAlinearFunciones{encolarPaquetes(conjPaquetes,colaPrior)}{}
+
+\tadAxioma{alto(nuevo($ancho$,$alto$,$obst$))}{$alto$}
+\tadAxioma{ancho(nuevo($ancho$,$alto$,$obst$))}{$ancho$}
+\tadAxioma{obstaculos(nuevo($ancho$,$alto$,$obst$))}{$obst$}
+\tadAxioma{posValida(nuevo($ancho$,$alto$,$obst$),$p_1$)}{$\pi_1(p_1)<ancho \land \pi_2(p_1)<alto$}
+\tadAxioma{adyacente(nuevo($ancho$,$alto$,$obst$),$p _1$,$p _2$)}{$(\pi_1(p_1)=\pi_1(p_2)-1 \lor\pi_1(p_1)=\pi_1(p_2)+1)\land (\pi_2(p_1)=\pi_2(p_2)-1 \lor\pi_2(p_1)=\pi_2(p_2)+1)$}
+\tadAxioma{posValida(nuevo($ancho$,$alto$,$obst$),$p_1$)}{$\pi_2(p_1)=alto-1 \lor \pi_2(p_1)=0$}
+\tadAxioma{minDistsPos(c,p,posiciones)}{\IF $\emptyset?(sinUno(posiciones))$ THEN
+											$dameUno(posiciones)$
+									   ELSE
+											{\IF $distMan(c,p,dameUno(posiciones)) \le minDist(c,p,posiciones)$ THEN
+												$Ag(minDistsPos(c,sinUno(posiciones)),$\\$dameUno(posiciones))$
+											ELSE
+												$minDistsPos(c,seg,sinUno(posiciones))$
+											FI}
+									   FI}
+\tadAxioma{minDist(c,p,posiciones)}{\IF $\emptyset?(sinUno(posiciones))$ THEN 
+										$distMan(c,p,dameUno(posiciones))$
+   								     ELSE
+										{\IF $distMan(c,p,dameUno(posiciones)) \le minDist(c,pos/p,sinUno(posiciones))$ THEN
+											$distMan(c,p,dameUno(posiciones))$
+										ELSE 
+											$minDist(c,p,sinUno(posiciones))$
+										FI}
+								     FI}
+\tadAxioma{distMan(c,$p_1$,$p_2$)}{$restaAbs(\pi_2(p_1),\pi_2(p_2))$+$restaAbs(\pi_1(p_1),\pi_1(p_2))$}
+
+\tadAxioma{restaAbs(n1,n2)}{\IF $n2 > n1$ THEN $n2-n1$ ELSE $n1-n2$ FI}
+\tadAxioma{conjPos(c,x,y)}{\IF $x \ge ancho(c)$ THEN $\emptyset$ ELSE
+								{\IF $y \ge alto(c)$ THEN
+									$conjPos(c,x+1,0)$
+								ELSE
+									$ag(conjPos(c,x,y+1), <x,y>)$
+								FI}
+							FI}
+
+\end{tad}
+
+
+\end{document}
