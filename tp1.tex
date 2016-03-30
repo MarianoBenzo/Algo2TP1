@@ -66,141 +66,134 @@
 \newpage
 
 
-\section{TAD \tadNombre{AS}}
-\begin{tad}{\tadNombre{AS}}
-\tadGeneros{as}
+\section{TAD \tadNombre{Dato}}
+\begin{tad}{\tadNombre{Dato}}
+\tadGeneros{dato}
 
 \tadIgualdadObservacional{dc}{dc'}{dcnet}{}
 
-\tadUsa{\tadNombre{campus}}
+\tadUsa{Bool, Nat, String}
 
 \tadExporta{\tadNombre{}}
 
 \tadObservadores
 
-%%%%%% EJEMPLOS  %%%%%%
-\tadOperacion{campus}{as}{campus}{}
-\tadOperacion{hayHippie?}{as/a,pos/p}{bool}{$posValida(campus(a),p)$}
-\tadOperacion{\#capturas}{as/a,seg/s}{nat}{$s \in seguridad(a)$}
+\tadOperacion{EsNat?}{dato}{bool}{}
+\tadOperacion{DNat}{dato/d}{nat}{$EsNat?(d)$}
+\tadOperacion{DString}{dato/d}{string}{$\neg EsNat?(d)$}
 
 
 \tadGeneradores
 
-
-%%%%%% EJEMPLOS  %%%%%%
-
-\tadOperacion{nueva}{campus,conj(seguridad)}{as}{(\paratodo{e}{segs}) posValida(c,pos(e)) $\land$ (\paratodo{s,s1}{segs}) id(s)!=id(s1) $\implies$ pos(s)!=pos(s1)}
-\tadOperacion{sacarEst}{as/a,pos/p}{as}{$posValida(campus(a),p) \yluego hayEst?(a,p) \land posIngreso(a,p)$}
-
-\tadOtrasOperaciones
-
-
-%%%%%% EJEMPLOS  %%%%%%
-\tadOperacion{haySeg?}{as/a,pos/p}{bool}{}
-\tadOperacion{proximasPosiciones}{as/a,conj(pos)/minPos,pos/posAct}{conj(pos)}{$\neg(emptyset?(minPos)) \yluego posValida(campus(a),posAct) \land posicionesValidas(campus(a),minPos)$}
+\tadOperacion{NDat}{bool, nat, string}{dato}{}
 
 
 \tadAxiomas[]
 
 
-\tadAxioma{campus(nueva($c,segs$))}{$c$}
-\tadAxioma{campus(moverEst($a,p_1,p_2$))}{$campus(a)$}
+\tadAxioma{EsNat?(NDato(b,n,s))}{$b$}
+\tadAxioma{DNat(NDato(b,n,s))}{$n$}
+\tadAxioma{DString(NDato(b,n,s))}{$s$}
 
-\tadAxioma{\#capturas(sacarEst($a,p_1$),$s$)}{$\#capturas(a,s)$}
-\tadAxioma{\#capturas($a$,moverSeg($a,s,p_1$))}{$
-\beta(posValida(campus(a),<\pi_1(p_1)+1,\pi_2(p_1)>) \yluego (hayHippie?(a,<\pi_1(p_1)+1,\pi_2(p_1)>) \yluego encerrado(a,<\pi_1(p_1)+1,\pi_2(p_1)>))) + \\
-\beta(posValida(campus(a),<\pi_1(p_1)-1,\pi_2(p_1)>) \yluego (hayHippie?(a,<\pi_1(p_1)-1,\pi_2(p_1)>) \yluego encerrado(a,<\pi_1(p_1)-1,\pi_2(p_1)>))) + \\
-\beta(posValida(campus(a),<\pi_1(p_1),\pi_2(p_1)+1>) \yluego (hayHippie?(a,<\pi_1(p_1),\pi_2(p_1)+1>) \yluego encerrado(a,<\pi_1(p_1),\pi_2(p_1)+1>))) + \\
-\beta(posValida(campus(a),<\pi_1(p_1),\pi_2(p_1)-1>) \yluego (hayHippie?(a,<\pi_1(p_1),\pi_2(p_1)-1>) \yluego encerrado(a,<\pi_1(p_1),\pi_2(p_1)-1>))) + \#capturas(a,s)$}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Axiomas otras operaciones%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
-\tadAxioma{moverTodos(a,segs)}{\IF $(\emptyset?(segs))$ THEN 
-								   $\emptyset$ 
-							   ELSE 
-								   {\IF $(hayHippies?(a))$ THEN 
-										$Ag(moverTodos(a, sinUno(segs)), $
-										\\$moverSeg(a,dameUno(segs),$
-										\\$dameUno(proxPosiciones$\\ $ $ $(hippiesMasCerca(a,dameUno(segs))))))$ 
-								    ELSE 
-										$segs$ 
-									FI} 
-							   FI}
 
 
 \end{tad}
 
 
-\section{TAD \tadNombre{campus}}
-\begin{tad}{\tadNombre{campus}}
-\tadGeneros{campus}
+\section{TAD \tadNombre{Registro}}
+\begin{tad}{\tadNombre{Registro}}
+\tadGeneros{reg}
 
-\tadUsa{\tadNombre{campus}}
+\tadUsa{Lista, Conjunto, Nat, Bool, \tadNombre{Dato}}
 
 \tadExporta{\tadNombre{}}
 
 \tadObservadores
-\tadOperacion{alto}{campus}{nat}{}
-\tadOperacion{ancho}{campus}{nat}{}
-\tadOperacion{obstaculos}{campus}{conj(pos)}{}
+
+\tadOperacion{Campos}{reg}{$conj(tupla(string, bool))$}{}
+\tadOperacion{Dato?}{reg/r, String/c}{Dato}{$tupla(c,True) \in Campos(r) \lor tupla(c,False) \in Campos(r)$}
 
 \tadGeneradores
 
-\tadOperacion{nuevo}{nat/ancho,nat/alto,conj(pos)/obst}{campus}{$1 \le ancho \land 1 \le alto$ $\land$ (\paratodo{pos}{p}) $p \in obst \impluego posValida(c,p)$}
+\tadOperacion{NReg}{}{reg}{}
+\tadOperacion{AgCampo}{reg/r, String/c, Bool/b, Dato/d}{reg}{$EsNat?(d)\equiv b$}
 
 \tadOtrasOperaciones
 
-\tadOperacion{adyacente}{as/a,pos/pe,pos/pd}{bool}{$posValida(c,pe) \land posValida(c,pd)$}
-\tadOperacion{posValida}{as/a,pos/p}{bool}{}
-\tadOperacion{posIngreso}{as/a,pos/p}{bool}{}
-\tadOperacion{minDistsPos}{campus/c,pos/p,conj(pos)/posiciones}{conj(pos)}{$\neg(\emptyset?(posiciones))$}
-\tadOperacion{minDist}{campus/c,pos/p,conj(posiciones)/posiciones}{nat}{$\neg(\emptyset?(posiciones))$}
-\tadOperacion{distMan}{campus/c,pos/p1,pos/p2}{nat}{}
-\tadOperacion{restaAbs}{nat,nat}{nat}{}
-\tadOperacion{conjPos}{campus,nat,nat}{conj(pos)}{}
+\tadOperacion{JRegs}{reg/r, reg/s}{reg}{}
 
-\tadAxiomas[\paratodo{nat}{alto}, \paratodo{nat}{ancho}, \paratodo{conj (pos)}{obst}
-\\\paratodo{pos}{p _1} \paratodo {pos}{p _2}]
+\tadAxiomas[]
 
-%que es esto? Es para que quede alineado y bonito y no se vaya de la hoja.
-\tadAlinearAxiomas{\#paquetesEnviados(ingresarPaquete($dc$,$p_1$,$c_1$,$c_2$),$c_3$),d 923)}
-\tadAlinearFunciones{encolarPaquetes(conjPaquetes,colaPrior)}{}
 
-\tadAxioma{alto(nuevo($ancho$,$alto$,$obst$))}{$alto$}
-\tadAxioma{ancho(nuevo($ancho$,$alto$,$obst$))}{$ancho$}
-\tadAxioma{obstaculos(nuevo($ancho$,$alto$,$obst$))}{$obst$}
-\tadAxioma{posValida(nuevo($ancho$,$alto$,$obst$),$p_1$)}{$\pi_1(p_1)<ancho \land \pi_2(p_1)<alto$}
-\tadAxioma{adyacente(nuevo($ancho$,$alto$,$obst$),$p _1$,$p _2$)}{$(\pi_1(p_1)=\pi_1(p_2)-1 \lor\pi_1(p_1)=\pi_1(p_2)+1)\land (\pi_2(p_1)=\pi_2(p_2)-1 \lor\pi_2(p_1)=\pi_2(p_2)+1)$}
-\tadAxioma{posValida(nuevo($ancho$,$alto$,$obst$),$p_1$)}{$\pi_2(p_1)=alto-1 \lor \pi_2(p_1)=0$}
-\tadAxioma{minDistsPos(c,p,posiciones)}{\IF $\emptyset?(sinUno(posiciones))$ THEN
-											$dameUno(posiciones)$
-									   ELSE
-											{\IF $distMan(c,p,dameUno(posiciones)) \le minDist(c,p,posiciones)$ THEN
-												$Ag(minDistsPos(c,sinUno(posiciones)),$\\$dameUno(posiciones))$
-											ELSE
-												$minDistsPos(c,seg,sinUno(posiciones))$
-											FI}
-									   FI}
-\tadAxioma{minDist(c,p,posiciones)}{\IF $\emptyset?(sinUno(posiciones))$ THEN 
-										$distMan(c,p,dameUno(posiciones))$
-   								     ELSE
-										{\IF $distMan(c,p,dameUno(posiciones)) \le minDist(c,pos/p,sinUno(posiciones))$ THEN
-											$distMan(c,p,dameUno(posiciones))$
-										ELSE 
-											$minDist(c,p,sinUno(posiciones))$
+\tadAxioma{Campos(NReg)}{$\emptyset$}
+\tadAxioma{Campos(AgCampo(r, c, b, d))}{$Ag(tupla(c, b))$}
+\tadAxioma{Dato?(AgCampo(r, c, b, d), c')}{\IF $c=c'$ THEN
+												$d$
+												ELSE
+												$Dato?(r)$
+												FI}
+\tadAxioma{Campos(JRegs(r, s))}{$Campos(r) \cup  Campos(s)$}
+\tadAxioma{Dato?(JRegs(r, s), c)}{\IF $c \in Campos(r)$ THEN
+										$Dato?(r, c)$
+										ELSE
+										$Dato?(s, c)$
 										FI}
-								     FI}
-\tadAxioma{distMan(c,$p_1$,$p_2$)}{$restaAbs(\pi_2(p_1),\pi_2(p_2))$+$restaAbs(\pi_1(p_1),\pi_1(p_2))$}
 
-\tadAxioma{restaAbs(n1,n2)}{\IF $n2 > n1$ THEN $n2-n1$ ELSE $n1-n2$ FI}
-\tadAxioma{conjPos(c,x,y)}{\IF $x \ge ancho(c)$ THEN $\emptyset$ ELSE
-								{\IF $y \ge alto(c)$ THEN
-									$conjPos(c,x+1,0)$
-								ELSE
-									$ag(conjPos(c,x,y+1), <x,y>)$
-								FI}
-							FI}
+
+\end{tad}
+
+
+\section{TAD \tadNombre{Tabla}}
+\begin{tad}{\tadNombre{Tabla}}
+\tadGeneros{tab}
+
+\tadUsa{}
+
+\tadExporta{\tadNombre{}}
+
+\tadObservadores
+
+\tadOperacion{Registros}{tab}{$conj(reg)$}{}
+\tadOperacion{CamposT}{tab}{$conj(campo)$}{}
+\tadOperacion{Claves}{tab}{$conj(campo)$}{}
+
+
+\tadGeneradores
+
+\tadOperacion{NTab}{conj(campo/cp,conj(campo)/cl)}{tab}{$($\paratodo{campo}{c}$) c \in cl \implies c \in cp$}
+\tadOperacion{AgReg}{tab/t, reg/r}{tab}{$CamposT(t)=Campos(r) \land (($\paratodo{reg}{r'}, \paratodo{campo}{c}$)(r' \in Registros(t) \land c \in claves(t)) \impluego (Dato?(r, c) \neq Dato?(r', c)))$}
+
+\tadOtrasOperaciones
+
+\tadOperacion{ElimReg}{tab/t, campo/c, dato/d}{tab}{$c \in CamposT(t) \land EsNat?(d)=\Pi_2 (c) $}
+\tadOperacion{ERR}{conj(reg), campo, dato}{conj(reg)}{}
+
+\tadAxiomas[]
+
+
+\tadAxioma{Registros(NTab(cp, cl))}{$\emptyset$}
+\tadAxioma{Registros(AgReg(t, r))}{$Ag(r, Registros(t)$}
+\tadAxioma{Registros(ElimReg(t, c, d))}{$ERR(Registros(t) ,c ,d)$}
+
+\tadAxioma{Campos(NTab(cp, cl))}{$cp$}
+\tadAxioma{Campos(AgReg(t, r))}{$Campos(t)$}
+\tadAxioma{Campos(ElimReg(t, c, d))}{$Campos(t)$}
+
+\tadAxioma{Claves(NTab(cp, cl))}{$cl$}
+\tadAxioma{Claves(AgReg(t, r))}{$Claves(t)$}
+\tadAxioma{Claves(ElimReg(t, c, d))}{$Claves(t)$}
+
+
+\tadAxioma{ERR(rs, c, d)}{\IF $rs = \emptyset$ THEN
+												$\emptyset$
+												ELSE
+													{\IF $d = Dato?(DameUno(rs), c)$ THEN
+													$ERR(SinUno(rs), c, d)$
+													ELSE
+													$Ag(DameUno(rs),ERR(SinUno(rs),c ,d)$
+													FI}
+												FI}
+
 
 \end{tad}
 
