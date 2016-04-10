@@ -315,14 +315,14 @@
 			FI}
 
 
-\tadAxioma{DameRegCon(r,d,c)}{
+\tadAxioma{DameRegSin(r,d,c)}{
 		\IF $r = \emptyset$ THEN
 				$\emptyset$
 			ELSE
 				{\IF $Dato?(DameUno(r),c)=d$ THEN
 						$DameRegSin(SinUno(r),d,c)$
 					ELSE
-						$Ag(DameUno(r),DameRegCon(SinUno(r),d,c))$
+						$Ag(DameUno(r),DameRegSin(SinUno(r),d,c))$
 				FI}
 			FI}
 			
