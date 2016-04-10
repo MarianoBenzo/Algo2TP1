@@ -239,7 +239,7 @@
 											FI}
 \tadAxioma{RegistrosT(AgReg(b, t1, r),t)}{\IF $t = t1$ THEN
 												$Ag(r, RegistrosT(b,t))$
-											ELSE {\IF $t \in claves(Triggers(b,t1)$ THEN $Ag(tgregs(campos(t), r, Obtener(t, Triggers(b, t1))), RegistrosT (b,t))$ ELSE $RegistrosT(b,t)$ FI }									
+											ELSE {\IF $t \in claves(Triggers(b,t1)$ THEN $Ag(tgregs(campos(t), r, Obtener(t, Triggers(b, t1))), \\ RegistrosT (b,t))$ ELSE $RegistrosT(b,t)$ FI }									
 											FI}
 \tadAxioma{RegistrosT(ElimReg(b, t1, c, d),t)}{$ERR(RegistrosT(b,t), c, d)$}
 \tadAxioma{RegistrosT(CrearJoin(b,t1,t2,c))}{$RegistrosT(b,t)$}
@@ -301,7 +301,7 @@
 \tadAxioma{Triggers(CrearJoin(b,t1,t2,cl) ,t)}{$Triggers(b,t)$}
 \tadAxioma{Triggers(EliminarJoin(b,t1,t2,cl) ,t)}{$Triggers(b,t)$}
 \tadAxioma{Triggers(AgTrigger(b,t1,t2,d) ,t)}{\IF $t=t1$ THEN $definir (Triggers(b,t), t2,d)$ ELSE $Triggers(b,t)$ FI}
-\tadAxioma{Triggers( ,t)}{\IF $t=t1$ THEN $borrar(Triggers(b,t), t2)$ ELSE $Triggers(b,t)$ FI}
+\tadAxioma{Triggers(EliminarTrigger(b,t1,t2) ,t)}{\IF $t=t1$ THEN $borrar(Triggers(b,t), t2)$ ELSE $Triggers(b,t)$ FI}
 
 \tadAxioma{JoinRegistros(r1,r2,c)}{
 		\IF $r1 = \emptyset \lor r2 = \emptyset$ THEN
@@ -337,7 +337,7 @@
 						$Ag(DameUno(r),DameRegSin(SinUno(r),d,c))$
 				FI}
 			FI}
-\tadAxioma{Tablas(NuevaBase(ct))}{$ct$}
+
 			
 			
 \end{tad}
