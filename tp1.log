@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.2)  9 APR 2016 22:10
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.2)  10 APR 2016 17:11
 entering extended mode
 **tp1.tex
 (C:\Users\Edgar\Desktop\Algo2TP1-master\tp1.tex
@@ -510,14 +510,14 @@ File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 
 AED: lastpage setting LastPage
 [5] [6]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 248.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 248.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 249.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 249.
  (C:\Users\Edgar\Desktop\Algo2TP1-master\tp1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 248.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 248.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 249.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 249.
 Package rerunfilecheck Info: File `tp1.out' has not changed.
 (rerunfilecheck)             Checksum: B0DB4454B2BF91CBB484B0516E41C2E6;188.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 248.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 249.
  ) 
 Here is how much of TeX's memory you used:
  7776 strings out of 493921
@@ -546,7 +546,7 @@ cm/cmr5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
 mr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy1
 0.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.p
 fb>
-Output written on tp1.pdf (6 pages, 167984 bytes).
+Output written on tp1.pdf (6 pages, 168211 bytes).
 PDF statistics:
  359 PDF objects out of 1000 (max. 8388607)
  12 named destinations out of 1000 (max. 500000)

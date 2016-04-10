@@ -199,25 +199,26 @@
 
 \tadObservadores
 
-\tadOperacion{Tablas}{bds}{$conj(tupla(tab,(conj(reg), nat))$}{}
-\tadOperacion{RegistrosT}{bds/b, tupla(tab, conj(reg),nat)/t}{$(conj(reg), nat))$}{$t \in Tablas(b)$}
-\tadOperacion{Joins}{bds}{$dicc(tupla(tab,tab,campo),tab)$}{}
-\tadOperacion{}{}{}{}
+\tadOperacion{Tablas}{bds}{$conj(tab)$}{}
+\tadOperacion{RegistrosT}{bds/b, tab/t}{$(conj(reg)$}{$t \in Tablas(b)$}
+\tadOperacion{Joins}{bds}{$dicc(tupla(conj(tab,tab,campo),tab))$}{}
+\tadOperacion{RegistrosJoin}{bds/b, tupla(tab,tab,campo)/t}{$con(reg)$}{$\Pi_1(t) \land \Pi_2 (t) \in Joins(b) $}
 
 
 \tadGeneradores
 
-\tadOperacion{NuevaBase}{conj(tab(tab,conj(reg),nat))}{bds}{}
-\tadOperacion{Agtab}{bds/b, tupla(tab,conj(reg),nat)/t}{bds}{$t \notin tabs(bds)$}
-\tadOperacion{Agreg}{bds/b, tupla(tab,conj(reg),nat)/t, reg/r}{bds}{$CamposT(\Pi_1(t))=Campos(r) \land (($\paratodo{reg}{r'}, \paratodo{campo}{c}$)(r' \in \Pi_2(t) \land c \in claves(\Pi_1(t))) \impluego (Dato?(r, c) \neq Dato?(r', c)))$}
-\tadOperacion{ElimReg}{bds b, tupla(tab,conj(reg),nat))/t, campo/c, dato/d}{bds}{$c \in CamposT(\Pi_1(t)) \land EsNat?(d)=\Pi_2 (c) $}
-\tadOperacion{CrearJoin}{bds/b, tab/t1, tab/t2, campo/cl}{bds}{$t1,t2 \in tabs(bds) \land cl \in campos(t1) \land cl \in campos(t2)$}
-\tadOperacion{EliminarJoin}{bds b, tab/t1, tab/t2}{bds}{}
-\tadOperacion{AgTrigger}{bds b, tab/t1, tab/t2}{bds}{}
-\tadOperacion{EliminarTrigger}{bds b, tab/t1, tab/t2}{bds}{}
+\tadOperacion{NuevaBase}{conj(tab)}{bds}{}
+\tadOperacion{Agtab}{bds/b, tab/t}{bds}{$t \notin tabs(bds)$}
+\tadOperacion{Agreg}{bds/b, tab/t, reg/r}{bds}{$CamposT(t)=Campos(r) \land (($\paratodo{reg}{r'}, \paratodo{campo}{c}$)(r' \in \Pi_2(t) \land c \in claves(t) \impluego (Dato?(r, c) \neq Dato?(r', c)))$}
+\tadOperacion{ElimReg}{bds/b, tab/t, campo/c, dato/d}{bds}{$c \in CamposT(t) \land EsNat?(d)=\Pi_2 (c) $}
+\tadOperacion{CrearJoin}{bds/b, tab/t1, tab/t2, campo/cl}{bds}{$t1,t2 \in Tablas(bds) \land cl \in campos(t1) \land cl \in campos(t2)$}
+\tadOperacion{EliminarJoin}{bds/b, tab/t1, tab/t2}{bds}{}
+\tadOperacion{AgTrigger}{bds/b, tab/t1, tab/t2}{bds}{}
+\tadOperacion{EliminarTrigger}{bds/b, tab/t1, tab/t2}{bds}{}
 
 \tadOtrasOperaciones
 
+\tadOperacion{Modificaciones}{bds/b, Tabla/t}{nat}{$t \in Tablas(t)$}
 \tadOperacion{TopModificadasT}{bds}{$conj(tupla(tabla,conj(reg),nat)$}{}
 
 
@@ -227,8 +228,8 @@
 \tadAxiomas[]
 
 \tadAxioma{Tablas(NuevaBase(cts))}{$cts$}
-\tadAxioma{Tablas(Agtab(b, t))}{$Ag(tabs(b), t)$}
-\tadAxioma{Tabas(AgReg(b, t, r))}{$Ag(tabs(b), Ag(\Pi_2(t),r)$}
+\tadAxioma{Tablas(Agtab(b, t))}{$Ag(Tablas(b), t)$}
+\tadAxioma{Tabas(AgReg(b, t, r))}{$Ag(Tablas(b), Ag(t,r)$}
 \tadAxioma{Tabas(ElimReg(b, t, r))}{$Tablas(b)-SinReg(t,r)$}
 \tadAxioma{Tablas(CrearJoin(b,t1,t2))}{${\emptyset}$}
 
