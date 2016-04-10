@@ -123,6 +123,7 @@
 \tadOtrasOperaciones
 
 \tadOperacion{JRegs}{reg/r, reg/s}{reg}{}
+\tadOperacion{tgregs}{conj(campo)/c, reg/r, dicc(campo,dato)/d}{reg}{($\forall$ $c_1$:campo) $(c_1 \in c)\Rightarrow (c_1 \in Campos(r) \lor c_1 \in claves (d)) $}
 
 \tadAxiomas[]
 
@@ -140,7 +141,7 @@
 										ELSE
 										$Dato?(s, c)$
 										FI}
-
+\tadAxioma{tgregs(c,r,d)}{\IF $c= \emptyset$ THEN Nreg ELSE {\IF $DameUno (c) \in Campos (r)$ THEN $AgCampo(tgregs(SinUno(c),r,d), DameUno(c), Dato? (r,Dameuno(c)))$ ELSE $AgCampo(tgregs(SinUno(c),r,d), DameUno(c), Obtener (DameUno(c),d))$ FI  } FI }
 
 \end{tad}
 
@@ -228,6 +229,7 @@
 \tadAxioma{Tablas(AgReg(b, t, r))}{$Tablas(b)$}
 \tadAxioma{Tablas(ElimReg(b, t, r))}{$Tablas(b)$}
 \tadAxioma{Tablas(CrearJoin(b, t1, t2, c))}{$Tablas(b)$}
+\tadAxioma{Tablas(AgTrigger(b, t1, t2, d))}{$Tablas(b)$}
 
 
 \tadAxioma{RegistrosT(AgTab(b,t1),t)}{\IF $t = t1$ THEN
@@ -237,11 +239,11 @@
 											FI}
 \tadAxioma{RegistrosT(AgReg(b, t1, r),t)}{\IF $t = t1$ THEN
 												$Ag(r, RegistrosT(b,t))$
-											ELSE
-												$RegistrosT(b,t)$
+											ELSE {\IF $t \in claves(Triggers(b,t1)$ THEN $Ag(tgregs(campos(t), r, Obtener(t, Triggers(b, t1))), RegistrosT (b,t))$ ELSE $RegistrosT(b,t)$ FI }									
 											FI}
 \tadAxioma{RegistrosT(ElimReg(b, t1, c, d),t)}{$ERR(RegistrosT(b,t), c, d)$}
 \tadAxioma{RegistrosT(CrearJoin(b,t1,t2,c))}{$RegistrosT(b,t)$}
+\tadAxioma{RegistrosT(AgTrigger(b,t1,t2,d))}{$RegistrosT(b,t)$}
 
 
 \tadAxioma{ERR(rs, c, d)}{\IF $rs = \emptyset$ THEN
@@ -261,6 +263,7 @@
 \tadAxioma{Joins(EliminarJoin(bds, t1, t2, c))}{$Borrar(tupla({t1,t2},c),Joins(bds))$}
 \tadAxioma{Joins(AgReg(bds, t, r))}{$Joins(bds)$}
 \tadAxioma{Joins(ElimReg(bds, t, c, d))}{$Joins(bds)$}
+\tadAxioma{Joins(AgTrigger(bds, t, c, d))}{$Joins(bds)$}
 
 
 \tadAxioma{RegistrosJ(AgTab(bds, t), tj)}{${RegistrosJ(bds,tj)}$}
@@ -289,7 +292,16 @@
 													$RegistrosJ(bds,tj)$
 													FI}
 
+\tadAxioma{RegistrosJ(AgTrigger(bds, t1, t2,d), tj)}{${RegistrosJ(bds,tj)}$}
 
+\tadAxioma{Triggers(NuevaBase(c) ,t)}{$\emptyset$}
+\tadAxioma{Triggers(AgTab(b,t1) ,t)}{$Triggers(b,t)$}
+\tadAxioma{Triggers(AgReg(b,t1,r) ,t)}{$Triggers(b,t)$}
+\tadAxioma{Triggers(EliminarReg(b,t1,c,d) ,t)}{$Triggers(b,t)$}
+\tadAxioma{Triggers(CrearJoin(b,t1,t2,cl) ,t)}{$Triggers(b,t)$}
+\tadAxioma{Triggers(EliminarJoin(b,t1,t2,cl) ,t)}{$Triggers(b,t)$}
+\tadAxioma{Triggers(AgTrigger(b,t1,t2,d) ,t)}{\IF $t=t1$ THEN $definir (Triggers(b,t), t2,d)$ ELSE $Triggers(b,t)$ FI}
+\tadAxioma{Triggers( ,t)}{\IF $t=t1$ THEN $borrar(Triggers(b,t), t2)$ ELSE $Triggers(b,t)$ FI}
 
 \tadAxioma{JoinRegistros(r1,r2,c)}{
 		\IF $r1 = \emptyset \lor r2 = \emptyset$ THEN
@@ -325,8 +337,11 @@
 						$Ag(DameUno(r),DameRegSin(SinUno(r),d,c))$
 				FI}
 			FI}
+\tadAxioma{Tablas(NuevaBase(ct))}{$ct$}
 			
 			
 \end{tad}
 
 \end{document}
+\grid
+\grid
