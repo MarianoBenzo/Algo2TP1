@@ -70,7 +70,7 @@
 \begin{tad}{\tadNombre{Dato}}
 \tadGeneros{dato}
 
-\tadIgualdadObservacional{d}{d'}{dato}{$\beta(EsNat?(d)=EsNat?(d'))==1 \impluego DNat(d)=DNat(d') \lor \beta(EsNat?(d)=EsNat?(d'))==0 \impluego DString(d)=DString(d')$}
+\tadIgualdadObservacional{d}{d'}{dato}{$(EsNat?(d)=1\land EsNat?(d)=EsNat?(d'))\impluego DNat(d)=DNat(d') \lor (EsNat?(d)= 0 \land EsNat?(d')=EsNat?(d')) \impluego DString(d)=DString(d')$}
 
 \tadUsa{Bool, Nat, String}
 
@@ -108,7 +108,7 @@
 
 \tadExporta{\tadNombre{}}
 
-\tadIgualdadObservacional{r}{r'}{registro}{$Campos(r)=Campos(r')\land(\forall c: String)tupla(c,bool)\in Campos(r) \impluego Dato?(r)=Dato(r'))$}
+\tadIgualdadObservacional{r}{r'}{reg}{$Campos(r)=Campos(r')\land(\forall c: String)tupla(c,bool)\in Campos(r) \impluego Dato?(r)=Dato(r'))$}
 
 \tadObservadores
 
@@ -153,11 +153,11 @@
 
 \tadExporta{\tadNombre{}}
 
-\tadIgualdadObservacional{t}{t'}{tab}{$Registros(t)=Registros(t')\land Campos(t)=Campos(t')\land Claves(t)=Claves(t') $}
+\tadIgualdadObservacional{t}{t'}{tab}{$Campos(t)=Campos(t') \land Claves(t)=Claves(t')$}
 
 \tadObservadores
 
-\tadOperacion{Registros}{tab}{$conj(reg)$}{}
+
 \tadOperacion{CamposT}{tab}{$conj(campo)$}{}
 \tadOperacion{Claves}{tab}{$conj(campo)$}{}
 
@@ -165,27 +165,12 @@
 \tadGeneradores
 
 \tadOperacion{NTab}{conj(campo/cp,conj(campo)/cl)}{tab}{$($\paratodo{campo}{c}$) c \in cl \implies c \in cp$}
-\tadOperacion{AgReg}{tab/t, reg/r}{tab}{$CamposT(t)=Campos(r) \land (($\paratodo{reg}{r'}, \paratodo{campo}{c}$)(r' \in Registros(t) \land c \in claves(t)) \impluego (Dato?(r, c) \neq Dato?(r', c)))$}
 
-\tadOtrasOperaciones
-
-\tadOperacion{ElimReg}{tab/t, campo/c, dato/d}{tab}{$c \in CamposT(t) \land EsNat?(d)=\Pi_2 (c) $}
-\tadOperacion{ERR}{conj(reg), campo, dato}{conj(reg)}{}
 
 \tadAxiomas[]
 
-
-\tadAxioma{Registros(NTab(cp, cl))}{$\emptyset$}
-\tadAxioma{Registros(AgReg(t, r))}{$Ag(r, Registros(t)$}
-\tadAxioma{Registros(ElimReg(t, c, d))}{$ERR(Registros(t) ,c ,d)$}
-
 \tadAxioma{Campos(NTab(cp, cl))}{$cp$}
-\tadAxioma{Campos(AgReg(t, r))}{$Campos(t)$}
-\tadAxioma{Campos(ElimReg(t, c, d))}{$Campos(t)$}
-
 \tadAxioma{Claves(NTab(cp, cl))}{$cl$}
-\tadAxioma{Claves(AgReg(t, r))}{$Claves(t)$}
-\tadAxioma{Claves(ElimReg(t, c, d))}{$Claves(t)$}
 
 
 \tadAxioma{ERR(rs, c, d)}{\IF $rs = \emptyset$ THEN
@@ -201,5 +186,63 @@
 
 \end{tad}
 
+
+
+\section{TAD \tadNombre{BaseDeDatos}}
+\begin{tad}{\tadNombre{BaseDeDatos}}
+\tadGeneros{bds}
+
+
+\tadUsa{Bool, Nat, String, Conjunto, Dicc(clave,significado), Tupla(),Dato, Tabla, Registro}
+
+\tadExporta{}
+
+\tadObservadores
+
+\tadOperacion{Tablas}{bds}{$conj(tupla(tab,(conj(reg), nat))$}{}
+\tadOperacion{RegistrosT}{bds/b, tupla(tab, conj(reg),nat)/t}{$(conj(reg), nat))$}{$t \in Tablas(b)$}
+\tadOperacion{Joins}{bds}{$dicc(tupla(tab,tab,campo),tab)$}{}
+\tadOperacion{}{}{}{}
+
+
+\tadGeneradores
+
+\tadOperacion{NuevaBase}{conj(tab(tab,conj(reg),nat))}{bds}{}
+\tadOperacion{Agtab}{bds/b, tupla(tab,conj(reg),nat)/t}{bds}{$t \notin tabs(bds)$}
+\tadOperacion{Agreg}{bds/b, tupla(tab,conj(reg),nat)/t, reg/r}{bds}{$CamposT(\Pi_1(t))=Campos(r) \land (($\paratodo{reg}{r'}, \paratodo{campo}{c}$)(r' \in \Pi_2(t) \land c \in claves(\Pi_1(t))) \impluego (Dato?(r, c) \neq Dato?(r', c)))$}
+\tadOperacion{ElimReg}{bds b, tupla(tab,conj(reg),nat))/t, campo/c, dato/d}{bds}{$c \in CamposT(\Pi_1(t)) \land EsNat?(d)=\Pi_2 (c) $}
+\tadOperacion{CrearJoin}{bds/b, tab/t1, tab/t2, campo/cl}{bds}{$t1,t2 \in tabs(bds) \land cl \in campos(t1) \land cl \in campos(t2)$}
+\tadOperacion{EliminarJoin}{bds b, tab/t1, tab/t2}{bds}{}
+\tadOperacion{AgTrigger}{bds b, tab/t1, tab/t2}{bds}{}
+\tadOperacion{EliminarTrigger}{bds b, tab/t1, tab/t2}{bds}{}
+
+\tadOtrasOperaciones
+
+\tadOperacion{TopModificadasT}{bds}{$conj(tupla(tabla,conj(reg),nat)$}{}
+
+
+
+\tadOperacion{ERR}{conj(reg), campo, dato}{conj(reg)}{}
+
+\tadAxiomas[]
+
+\tadAxioma{Tablas(NuevaBase(cts))}{$cts$}
+\tadAxioma{Tablas(Agtab(b, t))}{$Ag(tabs(b), t)$}
+\tadAxioma{Tabas(AgReg(b, t, r))}{$Ag(tabs(b), Ag(\Pi_2(t),r)$}
+\tadAxioma{Tabas(ElimReg(b, t, r))}{$Tablas(b)-SinReg(t,r)$}
+\tadAxioma{Tablas(CrearJoin(b,t1,t2))}{${\emptyset}$}
+
+\tadAxioma{RegistrosT(NuevaBase(cts),t)}{$RegistrosT(b,t)$}
+\tadAxioma{RegistrosT(Agtab(b,t1),t)}{$if t=t1 then{\emptyset} else RegistrosT(b,t)fi$}
+\tadAxioma{RegistrosT(AgReg(b, t1, r),t)}{$if t=t1 then Ag(Tablas(b), Ag(\Pi_2(t),r) else RegistroT(b,t) fi$}
+\tadAxioma{RegistrosT(ElimReg(b, t, r),t)}{$if t=t1 then Ag(Tablas(b), SinReg(t,r) else RegistroT(b,t) fi$}
+\tadAxioma{RegistrosT(CrearJoin(b,t1,t2,c))}{${\emptyset}$}
+
+\tadAxioma{Joins(NuevaBase(cts))}{${\emptyset}$}
+\tadAxioma{Joins(Agtab(bds, t))}{${\emptyset}$}
+\tadAxioma{Joins(CrearJoin(bds, t1, t2, cl))}{}
+
+
+\end{tad}
 
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.2)  2 APR 2016 23:29
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.2)  9 APR 2016 22:10
 entering extended mode
 **tp1.tex
 (C:\Users\Edgar\Desktop\Algo2TP1-master\tp1.tex
@@ -506,67 +506,27 @@ File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
 (C:\Users\Edgar\Desktop\Algo2TP1-master\tp1.toc)
 \tf@toc=\write4
- [2]
-Underfull \hbox (badness 1137) in paragraph at lines 73--73
-[]$\OML/cmm/m/it/10 \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 EsNat\OT1/cmr/m/n/10 ?(\
-OML/cmm/m/it/10 d\OT1/cmr/m/n/10 ) = \OML/cmm/m/it/10 EsNat\OT1/cmr/m/n/10 ?(\O
-ML/cmm/m/it/10 d[]\OT1/cmr/m/n/10 )) == 1 \OMS/cmsy/m/n/10 )[] \OML/cmm/m/it/10
- DNat\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 d\OT1/cmr/m/n/10 ) =$
- []
+ [2] [3] [4]
 
-
-Underfull \hbox (badness 1917) in paragraph at lines 73--73
-$\OML/cmm/m/it/10 DNat\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 d[]\OT1/cmr/m/n/10 ) \O
-MS/cmsy/m/n/10 _ \OML/cmm/m/it/10 \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 EsNat\OT1/
-cmr/m/n/10 ?(\OML/cmm/m/it/10 d\OT1/cmr/m/n/10 ) = \OML/cmm/m/it/10 EsNat\OT1/c
-mr/m/n/10 ?(\OML/cmm/m/it/10 d[]\OT1/cmr/m/n/10 )) == 0 \OMS/cmsy/m/n/10 )[]$
- []
-
-
-Underfull \hbox (badness 1137) in paragraph at lines 73--73
-[]$\OML/cmm/m/it/10 \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 EsNat\OT1/cmr/m/n/10 ?(\
-OML/cmm/m/it/10 d\OT1/cmr/m/n/10 ) = \OML/cmm/m/it/10 EsNat\OT1/cmr/m/n/10 ?(\O
-ML/cmm/m/it/10 d[]\OT1/cmr/m/n/10 )) == 1 \OMS/cmsy/m/n/10 )[] \OML/cmm/m/it/10
- DNat\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 d\OT1/cmr/m/n/10 ) =$
- []
-
-
-Underfull \hbox (badness 1917) in paragraph at lines 73--73
-$\OML/cmm/m/it/10 DNat\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 d[]\OT1/cmr/m/n/10 ) \O
-MS/cmsy/m/n/10 _ \OML/cmm/m/it/10 \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 EsNat\OT1/
-cmr/m/n/10 ?(\OML/cmm/m/it/10 d\OT1/cmr/m/n/10 ) = \OML/cmm/m/it/10 EsNat\OT1/c
-mr/m/n/10 ?(\OML/cmm/m/it/10 d[]\OT1/cmr/m/n/10 )) == 0 \OMS/cmsy/m/n/10 )[]$
- []
-
-
-Underfull \hbox (badness 1163) in paragraph at lines 73--73
-[]$\OML/cmm/m/it/7 \OT1/cmr/m/n/7 (\OML/cmm/m/it/7 EsNat\OT1/cmr/m/n/7 ?(\OML/
-cmm/m/it/7 d\OT1/cmr/m/n/7 ) = \OML/cmm/m/it/7 EsNat\OT1/cmr/m/n/7 ?(\OML/cmm/m
-/it/7 d[]\OT1/cmr/m/n/7 )) == 1 \OMS/cmsy/m/n/7 )[] \OML/cmm/m/it/7 DNat\OT1/cm
-r/m/n/7 (\OML/cmm/m/it/7 d\OT1/cmr/m/n/7 ) = \OML/cmm/m/it/7 DNat\OT1/cmr/m/n/7
- (\OML/cmm/m/it/7 d[]\OT1/cmr/m/n/7 ) \OMS/cmsy/m/n/7 _$
- []
-
-[3] 
 AED: lastpage setting LastPage
-[4] [5]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 205.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 205.
+[5] [6]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 248.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 248.
  (C:\Users\Edgar\Desktop\Algo2TP1-master\tp1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 205.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 205.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 248.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 248.
 Package rerunfilecheck Info: File `tp1.out' has not changed.
-(rerunfilecheck)             Checksum: A307ABB1188F4CF48ADEB400097C14E9;137.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 205.
+(rerunfilecheck)             Checksum: B0DB4454B2BF91CBB484B0516E41C2E6;188.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 248.
  ) 
 Here is how much of TeX's memory you used:
- 7773 strings out of 493921
- 110179 string characters out of 3144877
- 215254 words of memory out of 3000000
- 10929 multiletter control sequences out of 15000+200000
+ 7776 strings out of 493921
+ 110205 string characters out of 3144877
+ 216254 words of memory out of 3000000
+ 10930 multiletter control sequences out of 15000+200000
  16598 words of font info for 45 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 34i,17n,43p,364b,431s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 34i,17n,43p,384b,431s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Edgar\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
 eccc1000.pk> <C:\Users\Edgar\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\
 ec\dpi600\ecxc1440.pk> <C:\Users\Edgar\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour
@@ -586,9 +546,9 @@ cm/cmr5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
 mr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy1
 0.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.p
 fb>
-Output written on tp1.pdf (5 pages, 161386 bytes).
+Output written on tp1.pdf (6 pages, 167984 bytes).
 PDF statistics:
- 341 PDF objects out of 1000 (max. 8388607)
- 10 named destinations out of 1000 (max. 500000)
- 25 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 359 PDF objects out of 1000 (max. 8388607)
+ 12 named destinations out of 1000 (max. 500000)
+ 33 words of extra memory for PDF output out of 10000 (max. 10000000)
 
