@@ -206,7 +206,7 @@
 \tadOperacion{ElimReg}{bds/b, tab/t, campo/c, dato/d}{bds}{$c \in CamposT(t) \land EsNat?(d)=\Pi_2 (c) $}
 \tadOperacion{CrearJoin}{bds/b, tab/t1, tab/t2, campo/cl}{bds}{$t1,t2 \in Tablas(bds) \land cl \in campos(t1) \land cl \in campos(t2) \land tupla(\{t1,t2\},cl) \notin Claves(Joins(b))$}
 \tadOperacion{EliminarJoin}{bds/b, tab/t1, tab/t2, campo/cl}{bds}{$tupla(\{t1,t2\},cl) \in Claves(Joins(b))$}
-\tadOperacion{AgTrigger}{bds/b, tab/t1, tab/t2, dicc(campo, dato)/default}{bds}{$(claves(t2) \subseteq claves(t1)) \land (\paratodo{campo}{c} (c \in claves(default) \Leftrightarrow (c \in campos(t2) \land c \notin campos(t1))))$}
+\tadOperacion{AgTrigger}{bds/b, tab/t1, tab/t2, dicc(campo, dato)/default}{bds}{$(claves(t2) \subseteq claves(t1)) \land (\forall c:campo (c \in claves(default) \Leftrightarrow (c \in campos(t2) \land c \notin campos(t1))))$}
 \tadOperacion{EliminarTrigger}{bds/b, tab/t1, tab/t2}{bds}{}
 
 \tadOtrasOperaciones

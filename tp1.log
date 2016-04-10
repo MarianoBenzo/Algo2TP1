@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.4.2)  10 APR 2016 19:01
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.4.2)  10 APR 2016 19:05
 entering extended mode
 **tp1.tex
 ("C:\Users\Mariano\Facultad\Algo II\Segunda\TP1\2\Algo2TP1-master\tp1.tex"
@@ -510,150 +510,6 @@ File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 \tf@toc=\write4
 
 [2] [3] [4]
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.209 ...campos(t2) \land c \notin campos(t1))))$}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
 
 LaTeX Warning: Command \~ invalid in math mode on input line 258.
 
@@ -697,7 +553,7 @@ pe1/public/amsfonts/cm/cmr5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
 public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publ
 ic/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public
 /amsfonts/cm/cmsy7.pfb>
-Output written on tp1.pdf (6 pages, 170514 bytes).
+Output written on tp1.pdf (6 pages, 170526 bytes).
 PDF statistics:
  358 PDF objects out of 1000 (max. 8388607)
  12 named destinations out of 1000 (max. 500000)
