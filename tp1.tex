@@ -203,6 +203,7 @@
 \tadOperacion{RegistrosT}{bds/b, tab/t}{$(conj(reg)$}{$t \in Tablas(b)$}
 \tadOperacion{Joins}{bds}{$dicc(tupla(conj(tab,tab,campo),tab))$}{}
 \tadOperacion{RegistrosJoin}{bds/b, tupla(tab,tab,campo)/t}{$con(reg)$}{$\Pi_1(t) \land \Pi_2 (t) \in Joins(b) $}
+\tadOperacion{Triggers}{bds/b, tab/t}{$dicc(tab/t_2 , dicc(campo/c, dato)$}{t \pertenece Tablas(b)}
 
 
 \tadGeneradores
@@ -213,7 +214,7 @@
 \tadOperacion{ElimReg}{bds/b, tab/t, campo/c, dato/d}{bds}{$c \in CamposT(t) \land EsNat?(d)=\Pi_2 (c) $}
 \tadOperacion{CrearJoin}{bds/b, tab/t1, tab/t2, campo/cl}{bds}{$t1,t2 \in Tablas(bds) \land cl \in campos(t1) \land cl \in campos(t2)$}
 \tadOperacion{EliminarJoin}{bds/b, tab/t1, tab/t2}{bds}{}
-\tadOperacion{AgTrigger}{bds/b, tab/t1, tab/t2}{bds}{}
+\tadOperacion{AgTrigger}{bds/b, tab/t1, tab/t2, dicc (campo, dato)/default}{bds}{$(claves(t2) \subseteq claves(t1)) \land (\paratodo{campo}{c} (c \in claves (default) \Leftrightarrow (c \in campos(t2) \land c \not\in campos (t1))))$}
 \tadOperacion{EliminarTrigger}{bds/b, tab/t1, tab/t2}{bds}{}
 
 \tadOtrasOperaciones
