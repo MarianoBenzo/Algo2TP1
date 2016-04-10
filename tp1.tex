@@ -164,7 +164,7 @@
 
 \tadGeneradores
 
-\tadOperacion{NTab}{conj(campo/cp,conj(campo)/cl)}{tab}{$($\paratodo{campo}{c}$) c \in cl \implies c \in cp$}
+\tadOperacion{NTab}{conj(campo)/cp,conj(campo)/cl}{tab}{$($\paratodo{campo}{c}$) c \in cl \implies c \in cp$}
 
 
 \tadAxiomas[]
@@ -173,15 +173,7 @@
 \tadAxioma{Claves(NTab(cp, cl))}{$cl$}
 
 
-\tadAxioma{ERR(rs, c, d)}{\IF $rs = \emptyset$ THEN
-												$\emptyset$
-												ELSE
-													{\IF $d = Dato?(DameUno(rs), c)$ THEN
-													$ERR(SinUno(rs), c, d)$
-													ELSE
-													$Ag(DameUno(rs),ERR(SinUno(rs),c ,d)$
-													FI}
-												FI}
+
 
 
 \end{tad}
@@ -199,52 +191,142 @@
 
 \tadObservadores
 
-\tadOperacion{Tablas}{bds}{$conj(tab)$}{}
-\tadOperacion{RegistrosT}{bds/b, tab/t}{$(conj(reg)$}{$t \in Tablas(b)$}
-\tadOperacion{Joins}{bds}{$dicc(tupla(conj(tab,tab,campo),tab))$}{}
-\tadOperacion{RegistrosJoin}{bds/b, tupla(tab,tab,campo)/t}{$con(reg)$}{$\Pi_1(t) \land \Pi_2 (t) \in Joins(b) $}
-\tadOperacion{Triggers}{bds/b, tab/t}{$dicc(tab/t_2 , dicc(campo/c, dato)$}{t \pertenece Tablas(b)}
 
+\tadOperacion{Tablas}{bds}{$conj(tab)$}{}
+\tadOperacion{RegistrosT}{bds/b, tab/t}{$conj(reg)$}{$t \in Tablas(b)$}
+\tadOperacion{Joins}{bds}{$dicc(tupla(conj(tab),campo),tab))$}{}
+\tadOperacion{RegistrosJ}{bds/b, tupla(conj(tab),campo)/tj}{$conj(reg)$}{$tj \in Claves(Joins(b)) $}
+\tadOperacion{Triggers}{bds/b, tab/t}{$dicc(tab/t_2 , dicc(campo/c, dato)$}{$t \in Tablas(b)$}
 
 \tadGeneradores
 
 \tadOperacion{NuevaBase}{conj(tab)}{bds}{}
-\tadOperacion{Agtab}{bds/b, tab/t}{bds}{$t \notin tabs(bds)$}
-\tadOperacion{Agreg}{bds/b, tab/t, reg/r}{bds}{$CamposT(t)=Campos(r) \land (($\paratodo{reg}{r'}, \paratodo{campo}{c}$)(r' \in \Pi_2(t) \land c \in claves(t) \impluego (Dato?(r, c) \neq Dato?(r', c)))$}
+\tadOperacion{AgTab}{bds/b, tab/t}{bds}{$t \notin Tablas(bds)$}
+\tadOperacion{AgReg}{bds/b, tab/t, reg/r}{bds}{$CamposT(t)=Campos(r) \land (($\paratodo{reg}{r'}, \paratodo{campo}{c}$)(r' \in \Pi_2(t) \land c \in claves(t) \impluego (Dato?(r, c) \neq Dato?(r', c)))$}
 \tadOperacion{ElimReg}{bds/b, tab/t, campo/c, dato/d}{bds}{$c \in CamposT(t) \land EsNat?(d)=\Pi_2 (c) $}
-\tadOperacion{CrearJoin}{bds/b, tab/t1, tab/t2, campo/cl}{bds}{$t1,t2 \in Tablas(bds) \land cl \in campos(t1) \land cl \in campos(t2)$}
-\tadOperacion{EliminarJoin}{bds/b, tab/t1, tab/t2}{bds}{}
-\tadOperacion{AgTrigger}{bds/b, tab/t1, tab/t2, dicc (campo, dato)/default}{bds}{$(claves(t2) \subseteq claves(t1)) \land (\paratodo{campo}{c} (c \in claves (default) \Leftrightarrow (c \in campos(t2) \land c \not\in campos (t1))))$}
+\tadOperacion{CrearJoin}{bds/b, tab/t1, tab/t2, campo/cl}{bds}{$t1,t2 \in Tablas(bds) \land cl \in campos(t1) \land cl \in campos(t2) \land tupla(\{t1,t2\},cl) \notin Claves(Joins(b))$}
+\tadOperacion{EliminarJoin}{bds/b, tab/t1, tab/t2, campo/cl}{bds}{$tupla(\{t1,t2\},cl) \in Claves(Joins(b))$}
+\tadOperacion{AgTrigger}{bds/b, tab/t1, tab/t2, dicc(campo, dato)/default}{bds}{$(claves(t2) \subseteq claves(t1)) \land (\paratodo{campo}{c} (c \in claves(default) \Leftrightarrow (c \in campos(t2) \land c \notin campos(t1))))$}
 \tadOperacion{EliminarTrigger}{bds/b, tab/t1, tab/t2}{bds}{}
 
 \tadOtrasOperaciones
 
-\tadOperacion{Modificaciones}{bds/b, Tabla/t}{nat}{$t \in Tablas(t)$}
-\tadOperacion{TopModificadasT}{bds}{$conj(tupla(tabla,conj(reg),nat)$}{}
-
-
-
+\tadOperacion{TopModificadasT}{bds}{conj(tupla(tabla,conj(reg),nat)}{}
 \tadOperacion{ERR}{conj(reg), campo, dato}{conj(reg)}{}
+
+%% otras operaciones usadas en join %%
+\tadOperacion{JoinRegistros}{conj(reg),conj(reg),campo}{conj(reg)}{}
+\tadOperacion{DameRegCon}{conj(reg),dato,campo}{conj(reg)}{}
+\tadOperacion{DameRegSin}{conj(reg),dato,campo}{conj(reg)}{}
+
+
 
 \tadAxiomas[]
 
-\tadAxioma{Tablas(NuevaBase(cts))}{$cts$}
-\tadAxioma{Tablas(Agtab(b, t))}{$Ag(Tablas(b), t)$}
-\tadAxioma{Tabas(AgReg(b, t, r))}{$Ag(Tablas(b), Ag(t,r)$}
-\tadAxioma{Tabas(ElimReg(b, t, r))}{$Tablas(b)-SinReg(t,r)$}
-\tadAxioma{Tablas(CrearJoin(b,t1,t2))}{${\emptyset}$}
-
-\tadAxioma{RegistrosT(NuevaBase(cts),t)}{$RegistrosT(b,t)$}
-\tadAxioma{RegistrosT(Agtab(b,t1),t)}{$if t=t1 then{\emptyset} else RegistrosT(b,t)fi$}
-\tadAxioma{RegistrosT(AgReg(b, t1, r),t)}{$if t=t1 then Ag(Tablas(b), Ag(\Pi_2(t),r) else RegistroT(b,t) fi$}
-\tadAxioma{RegistrosT(ElimReg(b, t, r),t)}{$if t=t1 then Ag(Tablas(b), SinReg(t,r) else RegistroT(b,t) fi$}
-\tadAxioma{RegistrosT(CrearJoin(b,t1,t2,c))}{${\emptyset}$}
-
-\tadAxioma{Joins(NuevaBase(cts))}{${\emptyset}$}
-\tadAxioma{Joins(Agtab(bds, t))}{${\emptyset}$}
-\tadAxioma{Joins(CrearJoin(bds, t1, t2, cl))}{}
+\tadAxioma{Tablas(NuevaBase(ct))}{$ct$}
+\tadAxioma{Tablas(Agtab(b, t))}{$Ag(t, Tablas(b))$}
+\tadAxioma{Tablas(AgReg(b, t, r))}{$Tablas(b)$}
+\tadAxioma{Tablas(ElimReg(b, t, r))}{$Tablas(b)$}
+\tadAxioma{Tablas(CrearJoin(b, t1, t2, c))}{$Tablas(b)$}
 
 
+\tadAxioma{RegistrosT(AgTab(b,t1),t)}{\IF $t = t1$ THEN
+												$\emptyset$
+											ELSE
+												$RegistrosT(b,t)$
+											FI}
+\tadAxioma{RegistrosT(AgReg(b, t1, r),t)}{\IF $t = t1$ THEN
+												$Ag(r, RegistrosT(b,t))$
+											ELSE
+												$RegistrosT(b,t)$
+											FI}
+\tadAxioma{RegistrosT(ElimReg(b, t1, c, d),t)}{$ERR(RegistrosT(b,t), c, d)$}
+\tadAxioma{RegistrosT(CrearJoin(b,t1,t2,c))}{$RegistrosT(b,t)$}
+
+
+\tadAxioma{ERR(rs, c, d)}{\IF $rs = \emptyset$ THEN
+												$\emptyset$
+												ELSE
+													{\IF $d = Dato?(DameUno(rs), c)$ THEN
+													$ERR(SinUno(rs), c, d)$
+													ELSE
+													$Ag(DameUno(rs),ERR(SinUno(rs),c ,d)$
+													FI}
+												FI}
+
+
+\tadAxioma{Joins(NuevaBase(ct))}{$vacío$}
+\tadAxioma{Joins(AgTab(bds, t))}{${Joins(bds)}$}
+\tadAxioma{Joins(CrearJoin(bds, t1, t2, c))}{$Definir(tupla({t1,t2},c),Ntab((CamposT(t1) \cup CamposT(t2)-c),\\(ClavesT(t1) \cup ClavesT(t2)-c)),Joins(bds))$}
+\tadAxioma{Joins(EliminarJoin(bds, t1, t2, c))}{$Borrar(tupla({t1,t2},c),Joins(bds))$}
+\tadAxioma{Joins(AgReg(bds, t, r))}{$Joins(bds)$}
+\tadAxioma{Joins(ElimReg(bds, t, c, d))}{$Joins(bds)$}
+
+
+\tadAxioma{RegistrosJ(AgTab(bds, t), tj)}{${RegistrosJ(bds,tj)}$}
+\tadAxioma{RegistrosJ(CrearJoin(bds, t1, t2, c), tj)}{
+	\IF $t1 \in \pi_1(tj) \land t2 \in \pi_1(tj) \land c=\pi_2(tj)$ THEN
+	$JoinRegistros(RegistrosT(t1), RegistrosT(t2), c)$
+	ELSE
+	$RegistrosJ(bds, tj)$
+	FI
+	}
+\tadAxioma{RegistrosJ(EliminarJoin(bds, t1, t2, c), tj)}{$RegistrosJ(bds, tj)$}
+\tadAxioma{RegistrosJ(AgReg(bds, t, r), tj)}{\IF $t \notin \pi_1(tj)$ THEN
+											$RegistrosJ(bds,tj)$
+											ELSE
+												{\IF $DameRegCon(RegistrosT(\pi_1(tj)-t), Dato?(r, \pi_2(tj)), \pi_2(tj)) \neq \emptyset$ THEN
+													$Ag(Jreg(DameUno(DameRegCon(RegistrosT(\pi_1(tj) - t), \\ Dato?(r, \pi_2(tj)), \pi_2(tj))),r), RegistrosJ(bds,tj))$
+													ELSE
+													$RegistrosJ(bds,tj)$
+												FI}
+											FI}
+		
+
+\tadAxioma{RegistrosJ(ElimReg(bds, t, c, d), tj)}{\IF $t \in \pi_1(tj)$ THEN
+													$DameRegSin(RegistrosJ(bds,tj),d,c)$
+													ELSE
+													$RegistrosJ(bds,tj)$
+													FI}
+
+
+
+\tadAxioma{JoinRegistros(r1,r2,c)}{
+		\IF $r1 = \emptyset \lor r2 = \emptyset$ THEN
+				$\emptyset$
+			ELSE
+				{\IF $DameRegCon(r1,Dato?(DameUno(r2),c),c) \neq \emptyset$ THEN
+						$Ag(JRegs(DameUno(r2),\\ DameUno(DameRegCon(r1,Dato?(DameUno(r2),c)))), \\ JoinRegistros(r1, SinUno(r2),c))$
+					ELSE
+						$JoinRegistros(r1, SinUno(r2),c)$
+				FI}
+			FI}
+
+
+\tadAxioma{DameRegCon(r,d,c)}{
+		\IF $r = \emptyset$ THEN
+				$\emptyset$
+			ELSE
+				{\IF $Dato?(DameUno(r),c)=d$ THEN
+						${DameUno(r)}$
+					ELSE
+						$DameRegCon(SinUno(r),d,c)$
+				FI}
+			FI}
+
+
+\tadAxioma{DameRegCon(r,d,c)}{
+		\IF $r = \emptyset$ THEN
+				$\emptyset$
+			ELSE
+				{\IF $Dato?(DameUno(r),c)=d$ THEN
+						$DameRegSin(SinUno(r),d,c)$
+					ELSE
+						$Ag(DameUno(r),DameRegCon(SinUno(r),d,c))$
+				FI}
+			FI}
+			
+			
 \end{tad}
 
 \end{document}
