@@ -213,7 +213,6 @@
 
 \tadOtrasOperaciones
 
-\tadOperacion{TopModificadasT}{bds}{conj(tupla(tabla,conj(reg),nat)}{}
 \tadOperacion{ERR}{conj(reg), campo, dato}{conj(reg)}{}
 
 %% otras operaciones usadas en join %%
@@ -221,7 +220,10 @@
 \tadOperacion{DameRegCon}{conj(reg),dato,campo}{conj(reg)}{}
 \tadOperacion{DameRegSin}{conj(reg),dato,campo}{conj(reg)}{}
 
-
+%%operaciones de más modificada%%
+\tadOperacion{TMK}{conj(tab)/c,bds/b}{nat}{$c \subseteq Tablas(b)$}
+\tadOperacion{TM}{conj(tab)/c,bds/b}{conj(tab)}{$c \subseteq Tablas(b)$}
+\tadOperacion{MasModificada}{bds/b}{tab}{}
 
 \tadAxiomas[]
 
@@ -347,7 +349,9 @@
 						$Ag(DameUno(r),DameRegSin(SinUno(r),d,c))$
 				FI}
 			FI}
-
+\tadAxioma{MasModificada(b)}{DameUno(TM(tablas(b),b))}
+\tadAxioma{TM(c,b)}{\IF $c= \emptyset$  THEN $\emptyset$ ELSE {\IF $Modificaciones(DameUno(c),b)=TMK(c,b) $THEN Ag(DameUno(c), TM(SinUno(c),b)) ELSE TM(SinUno(c),b) FI} FI}
+\tadAxioma{TMK(c,b)}{\IF $c= \emptyset$ THEN $0$ ELSE {\IF $Modificaciones(DameUno(c),b)  > TMK(SinUno(c),b)$ THEN Modificaciones(DameUno(c),b) ELSE TMK(SinUno(c),b) FI} FI}
 			
 			
 \end{tad}
