@@ -198,6 +198,7 @@
 \tadOperacion{Joins}{bds}{$dicc(tupla(conj(tab),campo),tab))$}{}
 \tadOperacion{RegistrosJ}{bds/b, tupla(conj(tab),campo)/tj}{$conj(reg)$}{$tj \in Claves(Joins(b)) $}
 \tadOperacion{Triggers}{bds/b, tab/t}{$dicc(tab/t_2 , dicc(campo/c, dato)$}{$t \in Tablas(b)$}
+\tadOperacion{Modificaciones}{bds/b, tab/t}{$Nat$}{$t \in Tablas(b)$}
 
 \tadGeneradores
 
@@ -302,6 +303,15 @@
 \tadAxioma{Triggers(EliminarJoin(b,t1,t2,cl) ,t)}{$Triggers(b,t)$}
 \tadAxioma{Triggers(AgTrigger(b,t1,t2,d) ,t)}{\IF $t=t1$ THEN $definir (Triggers(b,t), t2,d)$ ELSE $Triggers(b,t)$ FI}
 \tadAxioma{Triggers(EliminarTrigger(b,t1,t2) ,t)}{\IF $t=t1$ THEN $borrar(Triggers(b,t), t2)$ ELSE $Triggers(b,t)$ FI}
+
+\tadAxioma{Modificaciones(NuevaBase(c) ,t)}{$0$}
+\tadAxioma{Modificaciones(AgTab(b,t1) ,t)}{\IF $t=t1$ THEN $0$ ELSE $Modificaciones(b,t)$ FI}
+\tadAxioma{Modificaciones(AgReg(b,t1,r) ,t)}{\IF $t=t1 \lor t \in claves(Triggers(b,t1))$ THEN $Modificaciones(b,t)+1$  ELSE $Modificaciones(b,t)$ FI}
+\tadAxioma{Modificaciones(EliminarReg(b,t1,c,d) ,t)}{\IF $t=t1$ THEN $Modificaciones(b,t)+1$  ELSE $Modificaciones(b,t)$ FI}
+\tadAxioma{Modificaciones(CrearJoin(b,t1,t2,cl) ,t)}{$Modificaciones(b,t)$}
+\tadAxioma{Modificaciones(EliminarJoin(b,t1,t2,cl) ,t)}{$Modificaciones(b,t)$}
+\tadAxioma{Modificaciones(AgTrigger(b,t1,t2,d) ,t)}{$Modificaciones(b,t)$}
+\tadAxioma{Modificaciones(EliminarTrigger(b,t1,t2) ,t)}{$Modificaciones(b,t)$}
 
 \tadAxioma{JoinRegistros(r1,r2,c)}{
 		\IF $r1 = \emptyset \lor r2 = \emptyset$ THEN
