@@ -70,7 +70,7 @@
 \begin{tad}{\tadNombre{Dato}}
 \tadGeneros{dato}
 
-\tadIgualdadObservacional{d}{d'}{dato}{$(EsNat?(d)=1\land EsNat?(d)=EsNat?(d'))\impluego DNat(d)=DNat(d') \lor (EsNat?(d)= 0 \land EsNat?(d')=EsNat?(d')) \impluego DString(d)=DString(d')$}
+\tadIgualdadObservacional{d}{d'}{dato}{$(EsNat?(d)=EsNat?(d')) \impluego (DNat(d)=DNat(d') \lor (DString(d)=DString(d'))$}
 
 \tadUsa{Bool, Nat, String}
 
@@ -189,6 +189,8 @@
 \tadUsa{Bool, Nat, String, Conjunto, Dicc(clave,significado), Tupla(),Dato, Tabla, Registro}
 
 \tadExporta{}
+
+\tadIgualdadObservacional{b}{b'}{bds}{$(Joins(b)=Joins(b') \land Tablas(b)=Tablas(b')) \yluego (\forall t:tab)(t \in Tablas(b)) \impluego (Trigger(b,t)=Trigger(b',t) \land RegistrosT(b,t)=RegistrosT(b',t)) \land (\forall tj:tupla({tab,tab},c))(tj \in Claves(Joins(b)) \impluego RegistrosJ(b,tj)=RegistrosJ(b',tj)$}
 
 \tadObservadores
 
